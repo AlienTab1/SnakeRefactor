@@ -38,6 +38,14 @@ namespace Snake
             var movement = "RIGHT";
             var buttonPressed = "no";
 
+            enum Direction
+            {
+                Up,
+                Down,
+                Right,
+                Left
+            }
+
             while (true)
             {
                 Console.Clear();
@@ -156,6 +164,63 @@ namespace Snake
             public int ypos { get; set; }
             public ConsoleColor schermkleur { get; set; }
         }*/
+
+        static Direction ReadMovement (Direction movement)
+        {
+            if (KeyAvailable)
+            {
+                var key = ReadKey (true).Key;
+
+                if (key == ConsoleKey.UpArrow && movement != Direction.Down)
+                {
+                    movement = Direction.Up;
+                }
+                else if (key == ConsoleKey.DownArrow && movement != Direction.Up)
+                {
+                    movement = Direction.Down;
+                }
+                else if (key == ConsoleKey.LeftArrow && movement != Direction.Right)
+                {
+                    movement = Direction.Left;
+                }
+                else if (key == ConsoleKey.RightArrow && movement != Direction.Left)
+                {
+                    movement = Direction.Right;
+                }
+            }
+
+            return movement;
+        }
+
+        static void DrawPixel (Pixel pixel)
+        {
+            SetCursorPosition (pixel.XPos, pixel.YPos);
+            ForegroundColor = pixel.ScreenColor;
+            Write ("■");
+            SetCursorPosition (0, 0);
+        }
+
+        static void DrawBorder ()
+        {
+            for (int i = 0; i < WindowWidth; i++)
+            {
+                SetCursorPosition (i, 0);
+                Write ("■");
+
+                SetCursorPosition (i, WindowHeight - 1);
+                Write ("■");
+            }
+
+            for (int i = 0; i < WindowHeight; i++)
+            {
+                SetCursorPosition (0, i);
+                Write ("■");
+
+                SetCursorPosition (WindowWidth - 1, i);
+                Write ("■");
+            }
+        }
+
         class Pixel
         {
             public Pixel (int xPos, int yPos, ConsoleColor color)
@@ -168,6 +233,8 @@ namespace Snake
             public int YPos { get; set; }
             public ConsoleColor ScreenColor { get; set; }
         }
+
+        
     }
 }
 //¦
