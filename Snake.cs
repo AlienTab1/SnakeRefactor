@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using static System.Console;
 ///█ ■
 ////https://www.youtube.com/watch?v=SGZgvMwjq2U
 namespace Snake
@@ -14,23 +15,29 @@ namespace Snake
         {
             Console.WindowHeight = 16;
             Console.WindowWidth = 32;
-            int screenwidth = Console.WindowWidth;
-            int screenheight = Console.WindowHeight;
-            Random randomnummer = new Random();
-            int score = 5;
-            int gameover = 0;
-            pixel hoofd = new pixel();
-            hoofd.xpos = screenwidth/2;
-            hoofd.ypos = screenheight/2;
-            hoofd.schermkleur = ConsoleColor.Red;
-            string movement = "RIGHT";
-            List<int> xposlijf = new List<int>();
-            List<int> yposlijf = new List<int>();
-            int berryx = randomnummer.Next(0, screenwidth);
-            int berryy = randomnummer.Next(0, screenheight);
-            DateTime tijd = DateTime.Now;
-            DateTime tijd2 = DateTime.Now;
-            string buttonpressed = "no";
+
+            var screenWidth = Console.WindowWidth;
+            var screenHeight = Console.WindowHeight;
+
+            var rand = new Random ();
+
+            var score = 5;
+            var gameover = 0;
+
+            var head = new Pixel (screenWidth / 2, screenHeight / 2, ConsoleColor.Red);
+
+            var xPosBody = new List<int> ();
+            var yPosBody = new List<int> ();
+
+            var xPosBerry = rand.Next (0, screenWidth);
+            var yPosBerry = rand.Next (0, screenHeight);
+
+            var time = DateTime.Now;
+            var time2 = DateTime.Now;
+
+            var movement = "RIGHT";
+            var buttonPressed = "no";
+
             while (true)
             {
                 Console.Clear();
@@ -143,11 +150,23 @@ namespace Snake
             Console.WriteLine("Game over, Score: "+ score);
             Console.SetCursorPosition(screenwidth / 5, screenheight / 2 +1);
         }
-        class pixel
+        /*class pixel
         {
             public int xpos { get; set; }
             public int ypos { get; set; }
             public ConsoleColor schermkleur { get; set; }
+        }*/
+        class Pixel
+        {
+            public Pixel (int xPos, int yPos, ConsoleColor color)
+            {
+                XPos = xPos;
+                YPos = yPos;
+                ScreenColor = color;
+            }
+            public int XPos { get; set; }
+            public int YPos { get; set; }
+            public ConsoleColor ScreenColor { get; set; }
         }
     }
 }
