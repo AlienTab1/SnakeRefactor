@@ -1,50 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Threading;
+using System.Diagnostics;
 using static System.Console;
-///█ ■
-////https://www.youtube.com/watch?v=SGZgvMwjq2U
+
 namespace Snake
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main ()
         {
-            Console.WindowHeight = 16;
-            Console.WindowWidth = 32;
-
-            var screenWidth = Console.WindowWidth;
-            var screenHeight = Console.WindowHeight;
+            WindowHeight = 16;
+            WindowWidth = 32;
 
             var rand = new Random ();
 
             var score = 5;
-            var gameover = 0;
 
-            var head = new Pixel (screenWidth / 2, screenHeight / 2, ConsoleColor.Red);
+            var head = new Pixel (WindowWidth / 2, WindowHeight / 2, ConsoleColor.Red);
+            var berry = new Pixel (rand.Next (1, WindowWidth - 2), rand.Next (1, WindowHeight - 2),     ConsoleColor.Cyan);
 
-            var xPosBody = new List<int> ();
-            var yPosBody = new List<int> ();
+            var body = new List<Pixel> ();
 
-            var xPosBerry = rand.Next (0, screenWidth);
-            var yPosBerry = rand.Next (0, screenHeight);
+            var currentMovement = Direction.Right;
 
-            var time = DateTime.Now;
-            var time2 = DateTime.Now;
-
-            var movement = "RIGHT";
-            var buttonPressed = "no";
-
-            enum Direction
-            {
-                Up,
-                Down,
-                Right,
-                Left
-            }
+            var gameover = false;
 
             while (true)
             {
@@ -165,7 +144,7 @@ namespace Snake
             }
         }
 
-        class Pixel
+        struct Pixel
         {
             public Pixel (int xPos, int yPos, ConsoleColor color)
             {
@@ -178,7 +157,12 @@ namespace Snake
             public ConsoleColor ScreenColor { get; set; }
         }
 
-        
+        enum Direction
+        {
+            Up,
+            Down,
+            Right,
+            Left
+        }
     }
 }
-//¦
