@@ -29,7 +29,7 @@ namespace Snake
             {
                 Clear ();
 
-                gameover |= (head.XPos == WindowWidth - 1 || head.XPos == 0 || head.YPos ==     WindowHeight - 1 || head.YPos == 0);
+                gameover |= (head.XPos == WindowWidth - 1 || head.XPos == 0 || head.YPos == WindowHeight - 1 || head.YPos == 0);
 
                 DrawBorder ();
 
